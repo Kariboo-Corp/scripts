@@ -36,8 +36,8 @@ sudo apt-get update && apt-get -y --quiet --no-install-recommends install \
 		wget \
 		xsltproc \
 		zip \
-	&& apt-get -y autoremove \
-	&& apt-get clean autoclean \
+	&& sudo apt-get -y autoremove \
+	&& sudo apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 cd /usr/src/gtest \
@@ -94,8 +94,8 @@ mkdir /tmp/.X11-unix && \
 
 wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
 	&& sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -sc` main" > /etc/apt/sources.list.d/gazebo-stable.list' \
-	&& apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends install \
+	&& sudo apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive sudo apt-get -y --quiet --no-install-recommends install \
 		ant \
 		binutils \
 		bc \
@@ -115,8 +115,8 @@ wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
 		protobuf-compiler \
 		x-window-system \
 		ignition-edifice \
-	&& apt-get -y autoremove \
-	&& apt-get clean autoclean \
+	&& sudo apt-get -y autoremove \
+	&& sudo apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb
@@ -127,8 +127,8 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-shadow.list' \
-	&& apt-get update \
-	&& apt-get -y --quiet --no-install-recommends install \
+	&& sudo apt-get update \
+	&& sudo apt-get -y --quiet --no-install-recommends install \
 		geographiclib-tools \
 		libeigen3-dev \
 		libgeographic-dev \
@@ -137,26 +137,26 @@ sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /e
 		python3-rosdep \
 		python3-catkin-tools \
 		python3-catkin-lint \
-		ros-$ROS_DISTRO-gazebo-ros-pkgs \
-		ros-$ROS_DISTRO-mavlink \
-		ros-$ROS_DISTRO-mavros \
-		ros-$ROS_DISTRO-mavros-extras \
-		ros-$ROS_DISTRO-octomap \
-		ros-$ROS_DISTRO-octomap-msgs \
-		ros-$ROS_DISTRO-pcl-conversions \
-		ros-$ROS_DISTRO-pcl-msgs \
-		ros-$ROS_DISTRO-pcl-ros \
-		ros-$ROS_DISTRO-ros-base \
-		ros-$ROS_DISTRO-rostest \
-		ros-$ROS_DISTRO-rosunit \
+		ros-noetic-gazebo-ros-pkgs \
+		ros-noetic-mavlink \
+		ros-noetic-mavros \
+		ros-noetic-mavros-extras \
+		ros-noetic-octomap \
+		ros-noetic-octomap-msgs \
+		ros-noetic-pcl-conversions \
+		ros-noetic-pcl-msgs \
+		ros-noetic-pcl-ros \
+		ros-noetic-ros-base \
+		ros-noetic-rostest \
+		ros-noetic-rosunit \
 		python3-catkin-tools \
 		python3-rosinstall-generator\
 		python3-wstool \
 		xvfb \
 		vim \
 	&& geographiclib-get-geoids egm96-5 \
-	&& apt-get -y autoremove \
-	&& apt-get clean autoclean \
+	&& sudo apt-get -y autoremove \
+	&& sudo apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 pip3 install -U \
