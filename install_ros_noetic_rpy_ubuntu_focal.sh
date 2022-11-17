@@ -44,7 +44,7 @@ sudo cd /usr/src/gtest \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake .. && make -j$(nproc) \
 	&& sudo find . -name \*.a -exec cp {} /usr/lib \; \
-	&& sudo cd .. && sudo rm -rf build
+	&& cd .. && sudo rm -rf build
 
 python3 -m pip install --upgrade pip wheel setuptools
 
@@ -56,25 +56,25 @@ sudo ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& sudo ln -s /usr/bin/ccache /usr/lib/ccache/c++
 
 sudo wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.1/astyle_3.1_linux.tar.gz -O /tmp/astyle.tar.gz \
-	&& sudo cd /tmp && sudo tar zxf astyle.tar.gz && sudo cd astyle/src \
+	&& cd /tmp && sudo tar zxf astyle.tar.gz && cd astyle/src \
 	&& sudo make -f ../build/gcc/Makefile -j$(nproc) && sudo cp bin/astyle /usr/local/bin \
 	&& sudo rm -rf /tmp/*
 
 sudo wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" -O /tmp/gradle-6.3-rc-4-bin.zip \
 	&& sudo mkdir /opt/gradle \
-	&& sudo cd /tmp \
+	&& cd /tmp \
 	&& sudo unzip -d /opt/gradle gradle-6.3-rc-4-bin.zip \
 	&& sudo rm -rf /tmp/*
 
 sudo git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foonathan_memory \
-	&& sudo cd /tmp/foonathan_memory \
+	&& cd /tmp/foonathan_memory \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake .. \
 	&& sudo cmake --build . --target install -- -j $(nproc) \
 	&& sudo rm -rf /tmp/*
 
 sudo git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.0.2 /tmp/FastDDS-2.0.2 \
-	&& sudo cd /tmp/FastDDS-2.0.2 \
+	&& cd /tmp/FastDDS-2.0.2 \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& sudo cmake --build . --target install -- -j $(nproc) \
