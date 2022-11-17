@@ -86,7 +86,7 @@ sudo git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.
 	&& sudo gradle install \
 	&& sudo rm -rf /tmp/*
 
-sudo useradd --shell /bin/bash -u 1001 -c "" -m user && usermod -a -G dialout user
+sudo useradd --shell /bin/bash -u 1001 -c "" -m user && sudo usermod -a -G dialout user
 
 sudo mkdir /tmp/.X11-unix && \
 	sudo chmod 1777 /tmp/.X11-unix && \
