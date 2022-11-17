@@ -1,4 +1,5 @@
-sudo apt-get update && apt-get -y --quiet --no-install-recommends install \
+sudo su root
+sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install \
 		bzip2 \
 		ca-certificates \
 		ccache \
@@ -46,18 +47,22 @@ cd /usr/src/gtest \
 	&& find . -name \*.a -exec cp {} /usr/lib \; \
 	&& cd .. && rm -rf build
 
+su dev
+
 python3 -m pip install --upgrade pip wheel setuptools
 
 python3 -m pip install argparse argcomplete coverage cerberus empy jinja2 kconfiglib \
 		matplotlib==3.0.* numpy nunavut>=1.1.0 packaging pkgconfig pyros-genmsg pyulog \
 		pyyaml requests serial six toml psutil pyulog wheel jsonschema pynacl
 
+sudo su root
+
 ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& ln -s /usr/bin/ccache /usr/lib/ccache/c++
 
 wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.1/astyle_3.1_linux.tar.gz -O /tmp/astyle.tar.gz \
 	&& cd /tmp && tar zxf astyle.tar.gz && cd astyle/src \
-	&& make -f ../build/gcc/Makefile -j$(nproc) && cp bin/astyle /usr/local/bin \
+	&& make -f ../build/gcc/Makefile -j$(nproc) && sudo cp bin/astyle /usr/local/bin \
 	&& rm -rf /tmp/*
 
 wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" -O /tmp/gradle-6.3-rc-4-bin.zip \
@@ -119,6 +124,7 @@ wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
 	&& sudo apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+cd
 wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb
 dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb
 
@@ -159,12 +165,18 @@ sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /e
 	&& sudo apt-get clean autoclean \
 	&& rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+su dev
+
 pip3 install -U \
 		osrf-pycommon
+
+cd
 
 wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && sudo bash ./install_geographiclib_datasets.sh
 
 rosdep init && rosdep update
+
+cd
 
 git clone https://github.com/PX4/PX4-Autopilot.git --recursive /home/$USER/PX4-Firmware/
 
