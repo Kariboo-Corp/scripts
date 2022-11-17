@@ -119,8 +119,8 @@ sudo wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-k
 	&& sudo apt-get clean autoclean \
 	&& sudo rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb
-sudo dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb
+cd /home/$USER/ \
+	&& wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb && sudo dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb
 
 sudo curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
@@ -162,11 +162,13 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main"
 pip3 install -U \
 		osrf-pycommon
 
-wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && sudo bash ./install_geographiclib_datasets.sh
+cd /home/$USER/ && \
+	wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && sudo bash ./install_geographiclib_datasets.sh
 
 sudo rosdep init && rosdep update
 
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive /home/$USER/PX4-Firmware/
+cd /home/$USER/ \
+	&& git clone https://github.com/PX4/PX4-Autopilot.git --recursive /home/$USER/PX4-Firmware/
 
 echo 'source ~/PX4-Firmware/Tools/simulation/gazebo/setup_gazebo.bash ~/PX4-Firmware ~/PX4-Firmware/build/px4_sitl_default' >> /home/user/.bashrc
 echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware' >> /home/user/.bashrc
