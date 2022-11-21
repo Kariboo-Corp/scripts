@@ -40,53 +40,54 @@ sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install \
 	&& sudo apt-get clean autoclean \
 	&& sudo rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-sudo cd /usr/src/gtest \
+cd /usr/src/gtest \
 	&& sudo mkdir build && cd build \
-	&& sudo cmake .. && make -j$(nproc) \
+	&& sudo cmake .. && sudo make -j$(nproc) \
 	&& sudo find . -name \*.a -exec cp {} /usr/lib \; \
 	&& cd .. && sudo rm -rf build
 
+cd /home/$USER/
 python3 -m pip install --upgrade pip wheel setuptools
-
+cd /home/$USER/
 python3 -m pip install argparse argcomplete coverage cerberus empy jinja2 kconfiglib \
 		matplotlib==3.0.* numpy nunavut>=1.1.0 packaging pkgconfig pyros-genmsg pyulog \
 		pyyaml requests serial six toml psutil pyulog wheel jsonschema pynacl
-
+cd /home/$USER/
 sudo ln -s /usr/bin/ccache /usr/lib/ccache/cc \
 	&& sudo ln -s /usr/bin/ccache /usr/lib/ccache/c++
-
+cd /home/$USER/
 sudo wget -q https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.1/astyle_3.1_linux.tar.gz -O /tmp/astyle.tar.gz \
 	&& cd /tmp && sudo tar zxf astyle.tar.gz && cd astyle/src \
 	&& sudo make -f ../build/gcc/Makefile -j$(nproc) && sudo cp bin/astyle /usr/local/bin \
 	&& sudo rm -rf /tmp/*
-
+cd /home/$USER/
 sudo wget -q "https://services.gradle.org/distributions/gradle-6.3-rc-4-bin.zip" -O /tmp/gradle-6.3-rc-4-bin.zip \
 	&& sudo mkdir /opt/gradle \
 	&& cd /tmp \
 	&& sudo unzip -d /opt/gradle gradle-6.3-rc-4-bin.zip \
 	&& sudo rm -rf /tmp/*
-
+cd /home/$USER/
 sudo git clone https://github.com/eProsima/foonathan_memory_vendor.git /tmp/foonathan_memory \
 	&& cd /tmp/foonathan_memory \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake .. \
 	&& sudo cmake --build . --target install -- -j $(nproc) \
 	&& sudo rm -rf /tmp/*
-
+cd /home/$USER/
 sudo git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.0.2 /tmp/FastDDS-2.0.2 \
 	&& cd /tmp/FastDDS-2.0.2 \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake -DTHIRDPARTY=ON -DSECURITY=ON .. \
 	&& sudo cmake --build . --target install -- -j $(nproc) \
 	&& sudo rm -rf /tmp/*
-
+cd /home/$USER/
 sudo git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& sudo gradle assemble \
 	&& sudo gradle install \
 	&& sudo rm -rf /tmp/*
-
-sudo useradd --shell /bin/bash -u 1001 -c "" -m user && sudo usermod -a -G dialout user
+cd /home/$USER/
+sudo usermod -a -G dialout dev
 
 sudo mkdir /tmp/.X11-unix && \
 	sudo chmod 1777 /tmp/.X11-unix && \
@@ -170,7 +171,7 @@ sudo rosdep init && rosdep update
 cd /home/$USER/ \
 	&& git clone https://github.com/PX4/PX4-Autopilot.git --recursive /home/$USER/PX4-Firmware/
 
-echo 'source ~/PX4-Firmware/Tools/simulation/gazebo/setup_gazebo.bash ~/PX4-Firmware ~/PX4-Firmware/build/px4_sitl_default' >> /home/user/.bashrc
-echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware' >> /home/user/.bashrc
-echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware/Tools/simulation/gazebo/sitl_gazebo' >> /home/user/.bashrc
-echo 'export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-9/plugins' >> /home/user/.bashrc
+echo 'source ~/PX4-Firmware/Tools/simulation/gazebo/setup_gazebo.bash ~/PX4-Firmware ~/PX4-Firmware/build/px4_sitl_default' >> /home/$USER/.bashrc
+echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware' >> /home/$USER/.bashrc
+echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware/Tools/simulation/gazebo/sitl_gazebo' >> /home/$USER/.bashrc
+echo 'export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-9/plugins' >> /home/$USER/.bashrc
