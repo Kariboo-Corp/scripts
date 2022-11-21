@@ -36,6 +36,7 @@ sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install \
 		wget \
 		xsltproc \
 		zip \
+		python3-testresources \
 	&& sudo apt-get -y autoremove \
 	&& sudo apt-get clean autoclean \
 	&& sudo rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
@@ -83,11 +84,11 @@ sudo git clone --recursive https://github.com/eProsima/Fast-DDS.git -b v2.0.2 /t
 cd /home/$USER/
 sudo git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 /tmp/Fast-RTPS-Gen-1.0.4 \
 	&& cd /tmp/Fast-RTPS-Gen-1.0.4 \
-	&& sudo gradle assemble \
-	&& sudo gradle install \
+	&& sudo /opt/gradle/gradle-6.3-rc-4/bin/gradle assemble \
+	&& sudo /opt/gradle/gradle-6.3-rc-4/bin/gradle install \
 	&& sudo rm -rf /tmp/*
 cd /home/$USER/
-sudo usermod -a -G dialout dev
+sudo usermod -a -G dialout $USER
 
 sudo mkdir /tmp/.X11-unix && \
 	sudo chmod 1777 /tmp/.X11-unix && \
@@ -121,9 +122,9 @@ sudo wget --quiet http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-k
 	&& sudo rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 cd /home/$USER/ \
-	&& wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.amd64.deb && sudo dpkg -i JSBSim-devel_1.1.1-134.focal.amd64.deb
+	&& wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.1a/JSBSim-devel_1.1.1-134.focal.arm64.deb && sudo dpkg -i JSBSim-devel_1.1.1-134.focal.arm64.deb
 
-sudo curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+sudo curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' \
 	&& sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' \
