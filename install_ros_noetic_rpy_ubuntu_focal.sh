@@ -168,11 +168,3 @@ cd /home/$USER/ && \
 	wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && sudo bash ./install_geographiclib_datasets.sh
 
 sudo rosdep init && rosdep update
-
-cd /home/$USER/ \
-	&& git clone https://github.com/PX4/PX4-Autopilot.git --recursive /home/$USER/PX4-Firmware/
-
-echo 'source ~/PX4-Firmware/Tools/simulation/gazebo/setup_gazebo.bash ~/PX4-Firmware ~/PX4-Firmware/build/px4_sitl_default' >> /home/$USER/.bashrc
-echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware' >> /home/$USER/.bashrc
-echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Firmware/Tools/simulation/gazebo/sitl_gazebo' >> /home/$USER/.bashrc
-echo 'export GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-9/plugins' >> /home/$USER/.bashrc
