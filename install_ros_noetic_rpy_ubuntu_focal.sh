@@ -155,6 +155,7 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main"
 		python3-rosinstall-generator\
 		python3-wstool \
 		python3-roslaunch \
+		python3-tf2-geometry-msgs \
 		xvfb \
 		vim \
 	&& sudo geographiclib-get-geoids egm96-5 \
