@@ -41,6 +41,10 @@ sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install \
 	&& sudo apt-get clean autoclean \
 	&& sudo rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
+sudo apt-get install libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \ 
+    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
+    libharfbuzz-dev libfribidi-dev libxcb1-dev
+
 cd /usr/src/gtest \
 	&& sudo mkdir build && cd build \
 	&& sudo cmake .. && sudo make -j$(nproc) \
